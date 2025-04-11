@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Trading Timer</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: #121212;
+      color: #ffffff;
+      font-family: 'Montserrat', sans-serif;
+      text-align: center;
+      padding-top: 20%;
+    }
+    .timer {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Trading in Progress...</h2>
+  <h3>FETCHING... THE BEST ARBITRAGE OPPORTUNITY</h3>
+  <div class="timer" id="timer">03:00</div>
+  <h3>Please wait while we process your trade</h3>
+  <img src="{{ url_for('static', filename='images/tradetimer.png') }}" alt="About Us">
+  <script>
+    var timeLeft = 180; // 3 minutes in seconds
+    var timerElement = document.getElementById('timer');
+    var countdown = setInterval(function() {
+      var minutes = Math.floor(timeLeft / 60);
+      var seconds = timeLeft % 180;
+      seconds = seconds < 10 ? "0" + seconds : seconds;
+      timerElement.textContent = (minutes < 10 ? "0" : "") + minutes + ":" + seconds;
+      timeLeft--;
+      if (timeLeft < 0) {
+        clearInterval(countdown);
+        window.location.href = "{{ url_for('result') }}";
+      }
+    }, 1000);
+  </script>
+</body>
+</html>

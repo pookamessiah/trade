@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Start Trading</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: #121212;
+      color: #ffffff;
+      font-family: 'Montserrat', sans-serif;
+      text-align: center;
+      padding: 20px;
+    }
+    .form-container {
+      background: #1f1f1f;
+      padding: 40px;
+      border-radius: 10px;
+      max-width: 400px;
+      margin: 50px auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    }
+    h2 {
+      color: #ffd700;
+      margin-bottom: 20px;
+    }
+    label {
+      font-size: 16px;
+    }
+    select, input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 5px;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background: #007bff;
+      color: #ffd700;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+    .message {
+      color: #ff4d4d;
+    }
+    a {
+      color: #007bff;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Trade Now</h2>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, msg in messages %}
+          <div class="message">{{ msg }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+    <form method="POST">
+      <label for="account_type">Select Account Type:</label>
+      <select name="account_type" id="account_type">
+        <option value="real">Real Account</option>
+        <option value="demo">Demo Account</option>
+      </select>
+      <label for="amount">Trading Amount:</label>
+      <input type="number" name="amount" id="amount" step="0.01" required>
+      <button type="submit">Trade</button>
+    </form>
+    <a href="{{ url_for('dashboard') }}">Back to Dashboard</a>
+  </div>
+</body>
+</html>

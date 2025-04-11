@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Trading Site - Home</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Using Google Fonts for a modern look -->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      background: #121212;
+      color: #ffffff;
+    }
+    header {
+      background: #1f1f1f;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header h1 {
+      margin: 0;
+      color: #007bff;
+    }
+    header nav a {
+      color: #ffffff;
+      margin-left: 20px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .hero {
+      text-align: center;
+      padding: 100px 20px;
+      background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+                  url('https://via.placeholder.com/1500x500') no-repeat center center;
+      background-size: cover;
+    }
+    .hero h1 {
+      font-size: 48px;
+      color: #007bff;
+    }
+    .hero p {
+      font-size: 24px;
+      color: #ffffff;
+    }
+    .section {
+      padding: 60px 20px;
+      text-align: center;
+    }
+    .section h2 {
+      font-size: 36px;
+      color: #007bff;
+      margin-bottom: 20px;
+    }
+   
+    .testimonial img, .hero img, .market img, .about img {
+      max-width: 100%;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+    footer {
+      background: #1f1f1f;
+      padding: 20px;
+      text-align: center;
+      color: #ffffff;
+    }
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background: #007bff;
+      color: #ffd700;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background 0.3s;
+    }
+    .btn:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Forex & Crypto Trading Bot</h1>
+    <nav>
+      <a href="{{ url_for('login') }}">Login</a>
+      <a href="{{ url_for('register') }}">Register</a>
+    </nav>
+  </header>
+  <div class="hero">
+    <img src="{{ url_for('static', filename='images/market-news.png') }}" alt="Market News">
+    <h1>Automate Your Trading with AI</h1>
+    <p>Stay ahead in the Forex & Crypto markets with our intelligent trading bot.</p>
+  </div>
+  <div class="section market">
+    <h2>Market Updates</h2>
+    <img src="{{ url_for('static', filename='images/Updates.png') }}" alt="About Us">
+    <img src="{{ url_for('static', filename='images/Updates1.png') }}" alt="About Us">
+  </div>
+  <div class="section about">
+    <h2>About Us</h2>
+    <img src="{{ url_for('static', filename='images/about-us1.png') }}" alt="About Us">
+    <img src="{{ url_for('static', filename='images/about-us.png') }}" alt="About Us">
+    <p>We are a leading trading platform committed to transparency and innovation.</p>
+  </div>
+  <footer>
+    <p>&copy; 2019 AI Trading Site. 100% Assured Winning.</p>
+  </footer>
+</body>
+</html>

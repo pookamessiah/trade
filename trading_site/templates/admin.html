@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Panel</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: #121212;
+      color: #ffffff;
+      font-family: 'Montserrat', sans-serif;
+      padding: 20px;
+    }
+    h2 {
+      text-align: center;
+      color: #ffd700;
+      margin-bottom: 20px;
+    }
+    table {
+      width: 90%;
+      margin: 0 auto;
+      border-collapse: collapse;
+      background: #1f1f1f;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    th, td {
+      padding: 12px;
+      border: 1px solid #007bff;
+      text-align: center;
+    }
+    th {
+      background: #007bff;
+      color: #ffd700;
+    }
+    input {
+      padding: 5px;
+      font-size: 14px;
+      width: 100px;
+      border: none;
+      border-radius: 3px;
+    }
+    button {
+      padding: 5px 10px;
+      font-size: 14px;
+      background: #007bff;
+      color: #ffd700;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+    a {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      padding: 10px;
+      background: #007bff;
+      color: #ffd700;
+      text-decoration: none;
+      border-radius: 5px;
+      width: 200px;
+      margin: 20px auto;
+    }
+    a:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <h2>Admin Panel</h2>
+  <table>
+    <tr>
+      <th>Username</th>
+      <th>Real Balance</th>
+      <th>Set New Balance</th>
+    </tr>
+    {% for user in users %}
+    <tr>
+      <td>{{ user.username }}</td>
+      <td>${{ user.real_balance }}</td>
+      <td>
+        <form method="POST">
+          <input type="hidden" name="user_id" value="{{ user.id }}">
+          <input type="number" name="real_balance" step="0.01" required>
+          <button type="submit">Update</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+  <a href="{{ url_for('dashboard') }}">Back to Dashboard</a>
+</body>
+</html>

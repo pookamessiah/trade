@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Deposit Funds</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: #121212;
+      color: #ffffff;
+      font-family: 'Montserrat', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .form-container {
+      background: #1f1f1f;
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+      width: 300px;
+      text-align: center;
+    }
+    h2 {
+      color: #ffd700;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 5px;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background: #007bff;
+      color: #ffd700;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+    a {
+      color: #007bff;
+      text-decoration: none;
+      display: block;
+      margin-top: 20px;
+    }
+    .message {
+      color: #ff4d4d;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Deposit Funds</h2>
+    <h3>Cryptocurrency</h3>
+    <h4>USDT: (TRC20) TUZ22QxPUhLZghZSoqn8PkchyuS64N2Hk2</h4>
+    <h4>TRX: (TRON) TUZ22QxPUhLZghZSoqn8PkchyuS64N2Hk2</h4>
+    <h4>LTC: ltc1qte9dhpv2679p8y6f2gr4cdk6r8lamw8686xmdq</h4>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, msg in messages %}
+          <div class="message">{{ msg }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+    <form method="POST">
+      <input type="number" name="amount" placeholder="Amount" step="0.01" required>
+      <button type="submit">Deposit</button>
+      <h6>Ensure you have sent the exact amount to the address</h6>
+    </form>
+    <a href="{{ url_for('dashboard') }}">Back to Dashboard</a>
+  </div>
+</body>
+</html>
