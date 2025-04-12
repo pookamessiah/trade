@@ -1,56 +1,64 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head>
-  <title>Trade Result</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
-  <style>
-    body {
-      background: #121212;
-      color: #ffffff;
-      font-family: 'Montserrat', sans-serif;
-      text-align: center;
-      padding: 20px;
-    }
-    .result {
-      font-size: 32px;
-      margin: 20px;
-      color: #ffd700;
-    }
-    .balance {
-      font-size: 24px;
-      margin: 20px;
-    }
-    a {
-      display: inline-block;
-      padding: 10px 20px;
-      background: #007bff;
-      color: #ffd700;
-      text-decoration: none;
-      border-radius: 5px;
-      transition: background 0.3s;
-    }
-    a:hover {
-      background: #0056b3;
-    }
-  </style>
-</head>
-<body>
-  <img src="{{ url_for('static', filename='images/successful.PNG') }}" alt="About Us">
-  <h2>Trade Result</h2>
-  <div class="result">
-    {% if outcome.result == '+' %}
-      You Profitted ${{ outcome.amount }} with {{ outcome.desc }}!
-    {% else %}
-      You lost ${{ outcome.amount }} with {{ outcome.desc }}!
-    {% endif %}
-  </div>
-  {% if account == 'real' %}
-    <div class="balance">Updated Real Balance: ${{ user.real_balance }}</div>
-  {% else %}
-    <div class="balance">Updated Demo Balance: ${{ user.demo_balance }}</div>
-  {% endif %}
-  <a href="{{ url_for('dashboard') }}">Back to Dashboard</a>
-</body>
+    <head>
+        <title>Trade Result</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link
+            href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap"
+            rel="stylesheet"
+        />
+        <style>
+            body {
+                background: #121212;
+                color: #ffffff;
+                font-family: "Montserrat", sans-serif;
+                text-align: center;
+                padding: 20px;
+            }
+            .result {
+                font-size: 32px;
+                margin: 20px;
+                color: #ffd700;
+            }
+            .balance {
+                font-size: 24px;
+                margin: 20px;
+            }
+            a {
+                display: inline-block;
+                padding: 10px 20px;
+                background: #007bff;
+                color: #ffd700;
+                text-decoration: none;
+                border-radius: 5px;
+                transition: background 0.3s;
+            }
+            a:hover {
+                background: #0056b3;
+            }
+        </style>
+    </head>
+    <body>
+        <img
+            src="{{ url_for('static', filename='images/successful.png') }}"
+            alt="About Us"
+        />
+        <h2>Trade Result</h2>
+        <div class="result">
+            {% if outcome.result == '+' %} You Profitted ${{ outcome.amount }}
+            with {{ outcome.desc }}! {% else %} You lost ${{ outcome.amount }}
+            with {{ outcome.desc }}! {% endif %}
+        </div>
+        {% if account == 'real' %}
+        <div class="balance">
+            Updated Real Balance: ${{ user.real_balance }}
+        </div>
+        {% else %}
+        <div class="balance">
+            Updated Demo Balance: ${{ user.demo_balance }}
+        </div>
+        {% endif %}
+        <a href="{{ url_for('dashboard') }}">Back to Dashboard</a>
+    </body>
 </html>
