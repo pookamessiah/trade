@@ -3,10 +3,14 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from flask_bcrypt import Bcrypt
 from datetime import datetime
+from dotenv import load_dotenv
+import os
 import random
 
+load_dotenv()
+
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'mysecretkey'
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'default_if_not_found')
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///trading.db'
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
@@ -91,7 +95,7 @@ def trade():
         except:
             flash("Invalid trade amount.", "danger")
             return redirect(url_for('trade'))
-        
+
         # Validate that trade amount does not exceed the selected account balance
         if account_type == 'real':
             if trade_amount > current_user.real_balance:
@@ -101,7 +105,7 @@ def trade():
             if trade_amount > current_user.demo_balance:
                 flash("Trade amount exceeds your demo balance!", "danger")
                 return redirect(url_for('trade'))
-        
+
         session['trade_account'] = account_type
         session['trade_amount'] = trade_amount
         return render_template('timer.html')
@@ -171,7 +175,7 @@ def result():
     outcome = random.choice(outcomes)
     trade_account = session.get('trade_account')
     trade_amount = session.get('trade_amount')
-    
+
     if trade_account == 'real':
         if outcome['result'] == '+':
             current_user.real_balance += outcome['amount']
@@ -183,7 +187,7 @@ def result():
         else:
             current_user.demo_balance -= outcome['amount']
     db.session.commit()
-    
+
     trade_change = outcome['amount'] if outcome['result'] == '+' else -outcome['amount']
     trans = Transaction(
         user_id=current_user.id,
