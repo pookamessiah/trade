@@ -5,8 +5,6 @@ from flask_bcrypt import Bcrypt
 from datetime import datetime
 import random
 
-load_dotenv()
-
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'mysecretkey'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///trading.db'
