@@ -38,6 +38,29 @@
     .nav-buttons a:hover {
       background: #0056b3;
     }
+    .chart-section {
+  padding: 30px 20px;
+  margin-top: 40px;
+  background: #1e1e1e;
+  color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
+}
+
+.chart-section h2 {
+  text-align: center;
+  color: #f39c12;
+  margin-bottom: 20px;
+  font-size: 28px;
+}
+
+.chart-container {
+  height: 600px;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 10px;
+  background-color: #111;
+}
   </style>
 </head>
 <body>
@@ -50,6 +73,57 @@
       <a href="{{ url_for('deposit') }}">Deposit</a>
       <a href="{{ url_for('withdraw') }}">Withdrawal</a>
       <a href="{{ url_for('transactions') }}">Transaction History</a>
+      <section class="chart-section">
+  <h2>Live Market Chart</h2>
+  <div class="chart-container">
+    {% raw %}
+    <!-- TradingView Widget BEGIN -->
+    <div class="tradingview-widget-container">
+      <div class="tradingview-widget-container__widget"></div>
+      <div class="tradingview-widget-copyright">
+        <a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank">
+          <span class="blue-text">Track all markets on TradingView</span>
+        </a>
+      </div>
+      <script
+        type="text/javascript"
+        src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js"
+        async
+      >
+      {
+        "autosize": true,
+        "symbol": "FX:EURUSD",
+        "interval": "D",
+        "timezone": "Etc/UTC",
+        "theme": "dark",
+        "style": "1",
+        "locale": "en",
+        "withdateranges": true,
+        "hide_side_toolbar": false,
+        "allow_symbol_change": true,
+        "watchlist": [
+          "COINBASE:BTCUSD",
+          "OANDA:XAUUSD",
+          "SP:SPX",
+          "FX:GBPUSD",
+          "BINANCE:XRPUSDT",
+          "OANDA:SPX500USD"
+        ],
+        "details": true,
+        "studies": [
+          "STD;Ichimoku%1Cloud",
+          "STD;SMA",
+          "STD;RSI"
+        ],
+        "support_host": "https://www.tradingview.com"
+      }
+      </script>
+    </div>
+    <!-- TradingView Widget END -->
+    {% endraw %}
+  </div>
+</section>
+
       {% if user.username == 'admin' %}
         <a href="{{ url_for('admin') }}">Admin Panel</a>
       {% endif %}
