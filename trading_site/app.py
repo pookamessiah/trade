@@ -70,7 +70,8 @@ def login():
         user = User.query.filter_by(username=username).first()
         if user and bcrypt.check_password_hash(user.password, request.form['password']):
             session.permanent = True
-            app.permanent_session_lifetime = timedelta(days=365)
+            app.permanent_session_lifetime = timedelta(days=7)
+            app.config['REMEMBER_COOKIE_DURATION'] = timedelta(days=7)
             login_user(user)
             return redirect(url_for('dashboard'))
         flash('Invalid username or password', 'danger')
